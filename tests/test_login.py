@@ -5,7 +5,7 @@ def test_correct_login(driver):
     home_page.go_to()
     home_page.login("standard_user", "secret_sauce")
 
-    home_page.get_page_title() == "Products"
+    assert home_page.get_page_title() == "Products"
     """
     home_page.add_to_chart_first()
     home_page.add_to_chart_second()
@@ -13,21 +13,21 @@ def test_correct_login(driver):
     """
     home_page.choose_products()
 
-    home_page.get_page_title() =="Your Cart"
-    home_page.verify_product() == "Sauce Labs Backpack"
-    home_page.verify_product() == "Sauce Labs Bike Light"
+    assert home_page.get_page_title() =="Your Cart"
+    assert home_page.verify_first_product() == "Sauce Labs Backpack"
+    assert home_page.verify_second_product() == "Sauce Labs Bike Light"
 
     home_page.checkout_action()
 
-    home_page.get_page_title() == "Checkout: Your Information"
+    assert home_page.get_page_title() == "Checkout: Your Information"
     home_page.checkout_your_information("Ime","Prezime","12345")
 
-    home_page.get_page_title() == "Checkout: Overview"
-    home_page.verify_product() == "Sauce Labs Backpack"
-    home_page.verify_product() == "Sauce Labs Bike Light"
+    assert home_page.get_page_title() == "Checkout: Overview"
+    assert home_page.verify_first_product() == "Sauce Labs Backpack"
+    assert home_page.verify_second_product() == "Sauce Labs Bike Light"
     home_page.finish_action()
 
-    home_page.get_page_title =="Checkout: Complete!"
+    assert home_page.get_page_title() == "Checkout: Complete!"
     home_page.click_burger_menu()
     home_page.log_out()
 

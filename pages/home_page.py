@@ -30,7 +30,7 @@ class HomePage:
 
     def is_login_and_signup_invisible(self):
         shopping_icon_locator = (By.ID, "shopping_cart_container")
-        self.wait.until(EC.invisibility_of_element_located(shopping_icon_locator))
+        self.wait.until(EC.visibility_of_element_located(shopping_icon_locator))
        
     def get_page_title(self):
         page_title = (By.CLASS_NAME, "title")
@@ -63,8 +63,13 @@ class HomePage:
         basket_icon = self.selenium_driver.find_element(By.XPATH, "//div[@id='shopping_cart_container']/a")
         basket_icon.click()        
     
-    def verify_product(self):
-        product_title = self.selenium_driver.find_element(By.CLASS_NAME, "inventory_item_name")
+    def verify_first_product(self):
+        product_title = self.selenium_driver.find_element(By.XPATH, "//a[@id='item_4_title_link']/div")
+        product_name = product_title.text
+        return product_name
+    
+    def verify_second_product(self):
+        product_title = self.selenium_driver.find_element(By.XPATH, "//a[@id='item_0_title_link']/div")
         product_name = product_title.text
         return product_name
 
@@ -102,12 +107,11 @@ class HomePage:
     def log_out(self):
         log_out_locator = (By.ID, "logout_sidebar_link")
         log_out = self.wait.until(EC.element_to_be_clickable(log_out_locator))
-        log_out.click()
-  
+        log_out.click()  
+
     def login_page(self):
         login_button_locator = (By.ID, "login-button")
         self.wait.until(EC.element_to_be_clickable(login_button_locator))
-
         
    
         
